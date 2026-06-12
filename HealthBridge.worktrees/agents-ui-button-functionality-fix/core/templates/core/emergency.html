@@ -1,0 +1,425 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency - HealthBridge</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .emergency-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #ff4b2b, #ff6b6b);
+            color: white;
+            border-radius: 20px;
+            margin: 40px 0;
+            animation: pulse 2s infinite;
+        }
+
+        .emergency-hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .emergency-hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 75, 43, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(255, 75, 43, 0);
+            }
+        }
+
+        .emergency-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .emergency-btn-large {
+            padding: 40px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            text-align: center;
+            color: white;
+        }
+
+        .ambulance-btn {
+            background: linear-gradient(135deg, #ff4b2b, #ff6b6b);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ambulance-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 75, 43, 0.3);
+        }
+
+        .hospital-btn {
+            background: linear-gradient(135deg, #0F4C81, #145d99);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hospital-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(15, 76, 129, 0.3);
+        }
+
+        .doctor-btn {
+            background: linear-gradient(135deg, #00b894, #10b981);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .doctor-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 184, 148, 0.3);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            border-left: 5px solid #ff4b2b;
+        }
+
+        .contact-card h3 {
+            color: #ff4b2b;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .contact-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .contact-card a,
+        .contact-card button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #ff4b2b;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .contact-card a:hover,
+        .contact-card button:hover {
+            background: #ff6b6b;
+            transform: translateY(-3px);
+        }
+
+        .steps-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            margin: 50px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 25px;
+            background: #f5f9ff;
+            border-radius: 12px;
+            transition: .3s;
+        }
+
+        .step:hover {
+            background: linear-gradient(135deg, #0F4C81, #00b894);
+            color: white;
+            transform: translateY(-8px);
+        }
+
+        .step-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: #0F4C81;
+            margin-bottom: 10px;
+        }
+
+        .step:hover .step-number {
+            color: white;
+        }
+
+        .step h4 {
+            margin-bottom: 10px;
+            color: #0F4C81;
+        }
+
+        .step:hover h4 {
+            color: white;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .step:hover p {
+            color: white;
+        }
+
+        .emergency-tips {
+            background: linear-gradient(135deg, #fff3cd, #ffe5a1);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #ffc107;
+            margin: 40px 0;
+        }
+
+        .emergency-tips h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .emergency-tips ul {
+            list-style: none;
+            color: #856404;
+        }
+
+        .emergency-tips li {
+            padding: 8px 0;
+            margin-left: 25px;
+        }
+
+        .emergency-tips li:before {
+            content: "⚠️";
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">
+        🏥 HealthBridge
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/doctors/">Doctors</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/appointments/">Appointments</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a href="/emergency/" class="nav-btn">Emergency</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<section style="padding: 120px 10% 100px;">
+
+    <!-- Emergency Alert -->
+    <div class="emergency-hero">
+        <h1>🚨 EMERGENCY HELP</h1>
+        <p>Need immediate medical assistance? We're here to help you right now!</p>
+        <p style="font-size: 16px; opacity: 0.95;">Emergency Response Team Available 24/7</p>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="emergency-buttons">
+        <button class="emergency-btn-large ambulance-btn">
+            <span style="font-size: 40px;">🚑</span>
+            <span>Call Ambulance</span>
+        </button>
+        <button class="emergency-btn-large hospital-btn">
+            <span style="font-size: 40px;">🏥</span>
+            <span>Find Hospital</span>
+        </button>
+        <button class="emergency-btn-large doctor-btn">
+            <span style="font-size: 40px;">👨‍⚕️</span>
+            <span>Talk to Doctor</span>
+        </button>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="contact-grid">
+
+        <div class="contact-card">
+            <h3>🚑 Ambulance Service</h3>
+            <p>
+                Immediate ambulance dispatch to your location. Our trained paramedics will provide first aid.
+            </p>
+            <p style="font-size: 18px; font-weight: 700; color: #ff4b2b;">
+                +91 9108 000 000
+            </p>
+            <a href="tel:+919108000000">Call Now</a>
+        </div>
+
+        <div class="contact-card">
+            <h3>🏥 Nearest Hospital</h3>
+            <p>
+                Locate the nearest hospital with emergency facilities and real-time bed availability.
+            </p>
+            <button onclick="alert('Locating nearest hospital...')">Find Now</button>
+        </div>
+
+        <div class="contact-card">
+            <h3>👨‍⚕️ Emergency Doctor</h3>
+            <p>
+                Instant consultation with an emergency medicine specialist available round the clock.
+            </p>
+            <button onclick="alert('Connecting you to an emergency doctor...')">Connect Now</button>
+        </div>
+
+    </div>
+
+    <!-- Steps Section -->
+    <div class="steps-section">
+        <h2 style="color: #0F4C81; margin-bottom: 10px;">How to Use Emergency Services</h2>
+        <p style="color: #666; margin-bottom: 30px;">
+            Follow these simple steps to get immediate help
+        </p>
+
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Tap SOS Button</h4>
+                <p>Press and hold the emergency button to activate</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Confirm Details</h4>
+                <p>Your location and medical info will be sent</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Get Assistance</h4>
+                <p>Ambulance/Doctor dispatched to you immediately</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h4>Real-time Tracking</h4>
+                <p>Track ambulance and communicate with paramedics</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Information -->
+    <div class="emergency-tips">
+        <h3>⚠️ Important Emergency Information</h3>
+        <ul>
+            <li>Call emergency services immediately for severe emergencies</li>
+            <li>Provide accurate location information for faster response</li>
+            <li>Keep your emergency contacts updated</li>
+            <li>Inform the responder about any allergies or medical conditions</li>
+            <li>Follow first aid instructions given by paramedics</li>
+            <li>Keep medical documents accessible</li>
+        </ul>
+    </div>
+
+    <!-- What Qualifies as Emergency -->
+    <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,.08); margin-top: 50px;">
+        <h2 style="color: #0F4C81; margin-bottom: 30px;">When to Use Emergency Services</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+
+            <div style="padding: 20px; background: #ffe5e5; border-radius: 10px;">
+                <h4 style="color: #ff4b2b; margin-bottom: 10px;">🚨 Critical Conditions</h4>
+                <ul style="list-style: none; color: #666; font-size: 14px;">
+                    <li>✓ Chest pain or discomfort</li>
+                    <li>✓ Difficulty breathing</li>
+                    <li>✓ Loss of consciousness</li>
+                    <li>✓ Severe bleeding</li>
+                </ul>
+            </div>
+
+            <div style="padding: 20px; background: #fff3cd; border-radius: 10px;">
+                <h4 style="color: #856404; margin-bottom: 10px;">⚠️ Urgent Situations</h4>
+                <ul style="list-style: none; color: #666; font-size: 14px;">
+                    <li>✓ Severe allergic reactions</li>
+                    <li>✓ Broken bones or injuries</li>
+                    <li>✓ Poisoning or overdose</li>
+                    <li>✓ Severe burns</li>
+                </ul>
+            </div>
+
+            <div style="padding: 20px; background: #e5f5e5; border-radius: 10px;">
+                <h4 style="color: #00b894; margin-bottom: 10px;">✓ When to Use Urgent Care</h4>
+                <ul style="list-style: none; color: #666; font-size: 14px;">
+                    <li>✓ Minor injuries</li>
+                    <li>✓ High fever</li>
+                    <li>✓ Severe headache</li>
+                    <li>✓ Dental problems</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <h3>HealthBridge © 2026</h3>
+    <p>
+        <a href="/doctors/" style="color: white; text-decoration: none;">Doctors</a> | 
+        <a href="/services/" style="color: white; text-decoration: none;">Services</a> | 
+        <a href="/contact/" style="color: white; text-decoration: none;">Contact</a> | 
+        <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a>
+    </p>
+</footer>
+
+<script>
+    // Emergency button handlers
+    document.querySelectorAll('.ambulance-btn, .hospital-btn, .doctor-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const type = this.classList[1];
+            if (type.includes('ambulance')) {
+                alert('🚑 Ambulance dispatch initiated!\n\nAmbulance is on the way to your location.\n\nETA: 5-7 minutes\n\nEmergency Support: +91 9108 000 000');
+            } else if (type.includes('hospital')) {
+                alert('🏥 Finding nearest hospital...\n\nNearest Hospital: City Medical Center\nDistance: 2.5 km\nAvailable Beds: 3\n\nPress OK to navigate');
+            } else if (type.includes('doctor')) {
+                alert('👨‍⚕️ Connecting to emergency doctor...\n\nDoctor: Dr. Rajesh Kumar\nSpecialty: Emergency Medicine\n\nStarting video call in 5 seconds...');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

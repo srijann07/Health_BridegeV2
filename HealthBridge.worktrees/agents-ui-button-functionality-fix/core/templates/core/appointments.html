@@ -1,0 +1,337 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointments - HealthBridge</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .appointment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: start;
+        }
+
+        @media (max-width: 1000px) {
+            .appointment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .appointment-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #0F4C81;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: .3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #0F4C81;
+            box-shadow: 0 0 10px rgba(15, 76, 129, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0F4C81, #00b894);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,.15);
+        }
+
+        .appointment-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            border-left: 4px solid #0F4C81;
+        }
+
+        .info-card h3 {
+            color: #0F4C81;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .benefit-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .benefit-list li {
+            padding: 10px 0;
+            color: #666;
+        }
+
+        .benefit-list li:before {
+            content: "✓ ";
+            color: #00b894;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .time-slot {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: .3s;
+            background: white;
+        }
+
+        .time-slot:hover {
+            border-color: #0F4C81;
+            background: #f5f9ff;
+        }
+
+        .time-slot.selected {
+            background: #0F4C81;
+            color: white;
+            border-color: #0F4C81;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">
+        🏥 HealthBridge
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/doctors/">Doctors</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/appointments/">Appointments</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a href="/emergency/" class="nav-btn">Emergency</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<section style="padding: 120px 10% 100px;">
+
+    <h1 style="text-align: center; color: #0F4C81; font-size: 48px; margin-bottom: 20px;">
+        Book Your Appointment
+    </h1>
+
+    <p style="text-align: center; color: #666; font-size: 18px; max-width: 700px; margin: 0 auto 40px;">
+        Schedule a consultation with our expert doctors. Quick and easy booking process.
+    </p>
+
+    <div class="appointment-container">
+
+        <!-- Form Section -->
+        <div class="appointment-form">
+            <h2 style="color: #0F4C81; margin-bottom: 30px;">
+                📅 Appointment Details
+            </h2>
+
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="10-digit mobile number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor">Select Doctor</label>
+                    <select id="doctor" required>
+                        <option value="">Choose a doctor...</option>
+                        <option value="smith">Dr. James Smith - Cardiologist</option>
+                        <option value="johnson">Dr. Sarah Johnson - Neurologist</option>
+                        <option value="brown">Dr. Michael Brown - General Physician</option>
+                        <option value="davis">Dr. Emily Davis - Pediatrician</option>
+                        <option value="wilson">Dr. Robert Wilson - Cardiologist</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Appointment Date</label>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Time Slot</label>
+                    <div class="time-slots">
+                        <div class="time-slot">09:00 AM</div>
+                        <div class="time-slot">09:30 AM</div>
+                        <div class="time-slot">10:00 AM</div>
+                        <div class="time-slot">10:30 AM</div>
+                        <div class="time-slot">11:00 AM</div>
+                        <div class="time-slot">11:30 AM</div>
+                        <div class="time-slot">02:00 PM</div>
+                        <div class="time-slot">02:30 PM</div>
+                        <div class="time-slot">03:00 PM</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Reason for Consultation</label>
+                    <select id="reason" required>
+                        <option value="">Select reason...</option>
+                        <option value="checkup">General Checkup</option>
+                        <option value="followup">Follow-up Consultation</option>
+                        <option value="symptoms">Specific Symptoms</option>
+                        <option value="prescription">Prescription Refill</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" placeholder="Any additional information..."></textarea>
+                </div>
+
+                <button type="submit" class="form-btn">
+                    ✓ Confirm Appointment
+                </button>
+            </form>
+        </div>
+
+        <!-- Info Section -->
+        <div class="appointment-info">
+
+            <div class="info-card">
+                <h3>🎯 Why Book with HealthBridge?</h3>
+                <ul class="benefit-list">
+                    <li>Verified and experienced doctors</li>
+                    <li>Flexible appointment scheduling</li>
+                    <li>Instant confirmation</li>
+                    <li>Secure online transactions</li>
+                    <li>Video or in-person options</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>📋 How to Prepare</h3>
+                <p>
+                    Keep medical records ready. Note down your symptoms and medications. Find a quiet space with good internet connection for video consultations.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>💬 Appointment Mode</h3>
+                <p style="margin-bottom: 15px;">
+                    Choose your preferred consultation mode:
+                </p>
+                <ul class="benefit-list">
+                    <li><strong>Video Call:</strong> Face-to-face consultation online</li>
+                    <li><strong>Audio Call:</strong> Phone consultation</li>
+                    <li><strong>In-Person:</strong> Visit at hospital/clinic</li>
+                </ul>
+            </div>
+
+            <div class="info-card" style="background: linear-gradient(135deg, #0F4C81, #00b894); border-left: none; color: white;">
+                <h3 style="color: white;">⏱️ Cancellation Policy</h3>
+                <p>
+                    Free cancellation up to 2 hours before appointment. Cancellations made within 2 hours will be charged 50% of consultation fee.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <h3>HealthBridge © 2026</h3>
+    <p>
+        <a href="/doctors/" style="color: white; text-decoration: none;">Doctors</a> | 
+        <a href="/services/" style="color: white; text-decoration: none;">Services</a> | 
+        <a href="/contact/" style="color: white; text-decoration: none;">Contact</a> | 
+        <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a>
+    </p>
+</footer>
+
+<script>
+    // Time slot selection
+    document.querySelectorAll('.time-slot').forEach(slot => {
+        slot.addEventListener('click', function() {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+
+    // Form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('✓ Appointment Booked Successfully!\n\nYou will receive a confirmation email shortly.');
+    });
+</script>
+
+</body>
+</html>

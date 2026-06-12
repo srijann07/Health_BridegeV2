@@ -1,0 +1,282 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctors - HealthBridge</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #0F4C81;
+            border-radius: 25px;
+            background: white;
+            color: #0F4C81;
+            cursor: pointer;
+            transition: .3s;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #0F4C81;
+            color: white;
+        }
+
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            transition: .4s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 40px rgba(0,0,0,.15);
+        }
+
+        .doctor-header {
+            background: linear-gradient(135deg, #0F4C81, #00b894);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 60px;
+        }
+
+        .doctor-info {
+            padding: 25px;
+        }
+
+        .doctor-info h3 {
+            color: #0F4C81;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+
+        .specialty {
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .doctor-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .doctor-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .book-btn {
+            background: #0F4C81;
+            color: white;
+        }
+
+        .book-btn:hover {
+            background: #145d99;
+        }
+
+        .profile-btn {
+            background: #f0f0f0;
+            color: #0F4C81;
+        }
+
+        .profile-btn:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">
+        🏥 HealthBridge
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/doctors/">Doctors</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/appointments/">Appointments</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a href="/emergency/" class="nav-btn">Emergency</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<section style="padding: 120px 10% 100px;">
+
+    <h1 style="text-align: center; color: #0F4C81; font-size: 48px; margin-bottom: 20px;">
+        Our Expert Doctors
+    </h1>
+
+    <p style="text-align: center; color: #666; font-size: 18px; max-width: 700px; margin: 0 auto 40px;">
+        Meet our experienced and certified medical professionals ready to provide you with the best healthcare services.
+    </p>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <button class="filter-btn active">All Specialties</button>
+        <button class="filter-btn">Cardiologist</button>
+        <button class="filter-btn">Neurologist</button>
+        <button class="filter-btn">Pediatrician</button>
+        <button class="filter-btn">General Physician</button>
+    </div>
+
+    <!-- Doctors Grid -->
+    <div class="doctor-grid">
+
+        <div class="doctor-card">
+            <div class="doctor-header">👨‍⚕️</div>
+            <div class="doctor-info">
+                <h3>Dr. James Smith</h3>
+                <p class="specialty">Cardiologist</p>
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                    15+ years experience
+                </p>
+                <div class="rating">
+                    ⭐ 4.9 (258 reviews)
+                </div>
+                <div class="doctor-actions">
+                    <button class="book-btn">Book Now</button>
+                    <button class="profile-btn">Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-header">👩‍⚕️</div>
+            <div class="doctor-info">
+                <h3>Dr. Sarah Johnson</h3>
+                <p class="specialty">Neurologist</p>
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                    12+ years experience
+                </p>
+                <div class="rating">
+                    ⭐ 4.8 (312 reviews)
+                </div>
+                <div class="doctor-actions">
+                    <button class="book-btn">Book Now</button>
+                    <button class="profile-btn">Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-header">👨‍⚕️</div>
+            <div class="doctor-info">
+                <h3>Dr. Michael Brown</h3>
+                <p class="specialty">General Physician</p>
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                    18+ years experience
+                </p>
+                <div class="rating">
+                    ⭐ 5.0 (425 reviews)
+                </div>
+                <div class="doctor-actions">
+                    <button class="book-btn">Book Now</button>
+                    <button class="profile-btn">Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-header">👩‍⚕️</div>
+            <div class="doctor-info">
+                <h3>Dr. Emily Davis</h3>
+                <p class="specialty">Pediatrician</p>
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                    10+ years experience
+                </p>
+                <div class="rating">
+                    ⭐ 4.9 (289 reviews)
+                </div>
+                <div class="doctor-actions">
+                    <button class="book-btn">Book Now</button>
+                    <button class="profile-btn">Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-header">👨‍⚕️</div>
+            <div class="doctor-info">
+                <h3>Dr. Robert Wilson</h3>
+                <p class="specialty">Cardiologist</p>
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                    16+ years experience
+                </p>
+                <div class="rating">
+                    ⭐ 4.7 (198 reviews)
+                </div>
+                <div class="doctor-actions">
+                    <button class="book-btn">Book Now</button>
+                    <button class="profile-btn">Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-header">👩‍⚕️</div>
+            <div class="doctor-info">
+                <h3>Dr. Lisa Anderson</h3>
+                <p class="specialty">Neurologist</p>
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                    14+ years experience
+                </p>
+                <div class="rating">
+                    ⭐ 4.8 (267 reviews)
+                </div>
+                <div class="doctor-actions">
+                    <button class="book-btn">Book Now</button>
+                    <button class="profile-btn">Profile</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <h3>HealthBridge © 2026</h3>
+    <p>
+        <a href="/doctors/" style="color: white; text-decoration: none;">Doctors</a> | 
+        <a href="/services/" style="color: white; text-decoration: none;">Services</a> | 
+        <a href="/contact/" style="color: white; text-decoration: none;">Contact</a> | 
+        <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a>
+    </p>
+</footer>
+
+</body>
+</html>

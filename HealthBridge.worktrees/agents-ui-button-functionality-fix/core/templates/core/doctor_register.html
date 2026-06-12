@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Register</title>
+    <link rel="stylesheet" href="{% static 'css/doctor.css' %}">
+</head>
+<body>
+
+<div class="float1">🩺</div>
+<div class="float2">💊</div>
+<div class="float3">❤️</div>
+<div class="float4">🧬</div>
+
+<div class="login-container">
+
+    <div class="login-box">
+
+        <h1>🏥 Doctor Registration</h1>
+
+        <p>Create your HealthBridge Doctor Account</p>
+
+        <form>
+
+            <input type="text" placeholder="Full Name">
+
+            <input type="email" placeholder="Email">
+
+            <input type="text" placeholder="Specialization">
+
+            <input type="text" placeholder="License Number">
+
+            <input type="password" placeholder="Password">
+
+            <input type="password" placeholder="Confirm Password">
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+        <a href="/doctor-login/">
+            Already have an account?
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
